@@ -16,6 +16,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
                     <View>  
                         <Icon style={[{color: tintColor}]} size={25} name={'ios-home'}/>  
                     </View>),  
+                    
             }  
         },  
         EnterData: { screen: EnterData,  

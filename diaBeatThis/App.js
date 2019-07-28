@@ -15,6 +15,20 @@ import {
 } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { firebase } from 'firebase';
+
+
+// const firebaseConfig = {
+//     apiKey: "AIzaSyA0Du6Emw6ZuN9RTJkhk2Mvc1-6f0Dh-zg",
+//     authDomain: "diabeatthis-ead81.firebaseapp.com",
+//     databaseURL: "https://diabeatthis-ead81.firebaseio.com",
+//     projectId: "diabeatthis-ead81",
+//     storageBucket: "diabeatthis-ead81.appspot.com",
+//     messagingSenderId: "122494668373",
+//     appId: "1:122494668373:web:9ec6702aab417769"
+//   };
+//   // Initialize Firebase
+//   firebase.initializeApp(firebaseConfig);
 
 
 
@@ -24,6 +38,11 @@ import Home from './screens/Home';
 import EnterData from './screens/EnterDataScreen';
 import NotificationScreen from './screens/NotificationScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import CameraScreen from './screens/CameraScreen';
+import ManualEntry from './screens/ManualEntry';
+import Enter from './screens/Enter';
+
+
 
 const AppStackNavigator = createStackNavigator({
 
@@ -75,6 +94,10 @@ const AppStackNavigator = createStackNavigator({
               <View>
                 <Icon style={[{ color: tintColor }]} size={25} name={'ios-person'} />
               </View>),
+              activeColor:'#f0edf6',
+              inactiveColor:'#133130',
+              barStyle: { backgroundColor: '#255E5E'}
+              
           }
         },
 
@@ -89,6 +112,9 @@ const AppStackNavigator = createStackNavigator({
       },
     ),
   },
+  Camera: { screen: CameraScreen }, 
+  ManualEntry: {screen: ManualEntry},
+  Enter: {screen: Enter}
 
 
 }, {

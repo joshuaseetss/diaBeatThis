@@ -3,7 +3,7 @@ import {
     View,
     Text,
     StyleSheet,
-    Button,
+    TouchableOpacity,
     Image,
     Dimensions,
     TextInput
@@ -49,9 +49,9 @@ class LogInScreen extends Component {
 
     render() {
 
-        // if (this.state.isLoading) {
-        //     return <SplashScreen />;
-        // }
+        if (this.state.isLoading) {
+            return <SplashScreen />;
+        }
 
 
         return (
@@ -89,12 +89,14 @@ class LogInScreen extends Component {
                 <Text> Forgot your password? </Text>
 
 
-
-                <Button
-                    title="Start"
-                    color="red"
+                <TouchableOpacity
+                    style={styles.button}
                     onPress={() => this.props.navigation.navigate('Home')}
-                />
+
+                >
+                    <Text> Sign In </Text>
+                </TouchableOpacity>
+ 
             </View>
 
 
@@ -189,5 +191,10 @@ const styles = StyleSheet.create({
         marginLeft: 16,
         borderBottomColor: '#FFFFFF',
         flex: 1,
+    },
+    button: {
+        alignItems: 'center',
+        backgroundColor: '#ff0000',
+        padding: 10
     },
 })
