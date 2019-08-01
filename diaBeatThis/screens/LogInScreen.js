@@ -8,7 +8,7 @@ import {
     Dimensions,
     TextInput
 } from 'react-native';
-import { firebase } from 'firebase';
+import * as firebase from 'firebase';
 
 
 class LogInScreen extends Component {
@@ -22,9 +22,9 @@ class LogInScreen extends Component {
             storageBucket: "diabeatthis-ead81.appspot.com",
             messagingSenderId: "122494668373",
             appId: "1:122494668373:web:9ec6702aab417769"
-          };
-          // Initialize Firebase
-          firebase.initializeApp(firebaseConfig);
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
     }
 
     static navigationOptions = {
@@ -62,6 +62,32 @@ class LogInScreen extends Component {
             });
         }
     }
+
+    SignUp = (email, password) => {
+        try {
+            firebase
+                .auth()
+                .createUserWithEmailAndPassword(email, password)
+                .then(user => {
+                    console.log(user);
+                });
+        } catch (error) {
+            console.log(error.toString(error));
+        }
+    };
+
+    Login = (email, password) => {
+        try {
+            firebase
+                .auth()
+                .signInWithEmailAndPassword(email, password)
+                .then(res => {
+                    console.log(res.user.email);
+                });
+        } catch (error) {
+            console.log(error.toString(error));
+        }
+    };
 
     render() {
 
@@ -112,7 +138,16 @@ class LogInScreen extends Component {
                 >
                     <Text> Sign In </Text>
                 </TouchableOpacity>
- 
+
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => this.LogIn(this.state.email, this.state.password)}
+
+                >
+                    <Text> Sign Up </Text>
+                </TouchableOpacity>
+
+
             </View>
 
 
