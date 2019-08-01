@@ -67,7 +67,7 @@ class ManualEntry extends Component {
                     onPress={
                         () => this.login(this.state.email, this.state.password)
                     }>
-                    <Text style={styles.submitButtonText}> Submit </Text>
+                    <Text style={styles.submitButtonText}> Post </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
