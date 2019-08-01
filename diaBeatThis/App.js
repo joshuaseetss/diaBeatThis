@@ -22,6 +22,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 
 import LogInScreen from './screens/LogInScreen';
+import LoadingScreen from './screens/Loading';
 import Home from './screens/Home';
 import EnterData from './screens/EnterDataScreen';
 import NotificationScreen from './screens/NotificationScreen';
@@ -38,6 +39,7 @@ const AppStackNavigator = createStackNavigator({
   Inside: {
     screen: createMaterialBottomTabNavigator(
       {
+        Loading: { screen: LoadingScreen },
         Home: {
           screen: Home,
           navigationOptions: {
@@ -82,10 +84,10 @@ const AppStackNavigator = createStackNavigator({
               <View>
                 <Icon style={[{ color: tintColor }]} size={25} name={'ios-person'} />
               </View>),
-              activeColor:'#f0edf6',
-              inactiveColor:'#133130',
-              barStyle: { backgroundColor: '#255E5E'}
-              
+            activeColor: '#f0edf6',
+            inactiveColor: '#133130',
+            barStyle: { backgroundColor: '#255E5E' }
+
           }
         },
 
@@ -93,16 +95,16 @@ const AppStackNavigator = createStackNavigator({
       },
 
       {
-        initialRouteName: "Home",
+        initialRouteName: "Loading",
         activeColor: '#f0edf6',
         inactiveColor: '#226557',
         barStyle: { backgroundColor: '#3BAD87' },
       },
     ),
   },
-  Camera: { screen: CameraScreen }, 
-  ManualEntry: {screen: ManualEntry},
-  Enter: {screen: Enter}
+  Camera: { screen: CameraScreen },
+  ManualEntry: { screen: ManualEntry },
+  Enter: { screen: Enter }
 
 
 }, {

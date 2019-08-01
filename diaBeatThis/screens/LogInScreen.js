@@ -133,7 +133,7 @@ class LogInScreen extends Component {
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => this.props.navigation.navigate('Home')}
+                    onPress={() => this.Login(this.state.email, this.state.password)}
 
                 >
                     <Text> Sign In </Text>
@@ -141,7 +141,7 @@ class LogInScreen extends Component {
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => this.LogIn(this.state.email, this.state.password)}
+                    onPress={() => this.SignUp(this.state.email, this.state.password)}
 
                 >
                     <Text> Sign Up </Text>
