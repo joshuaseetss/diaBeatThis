@@ -10,6 +10,10 @@ import {
     ScrollView
 } from 'react-native';
   
+import { db } from '../services/db'
+//attaining data from database 
+let itemsRef = db.ref('/items');
+
 const TabHeader = () => (
     <View style={styles.tabheader}>
       <Text style={styles.tabtitle}> HOME </Text>
@@ -17,6 +21,18 @@ const TabHeader = () => (
   )
 
 class Home extends Component {
+
+    state = {
+        items: []
+    }
+
+    componentDidMount() {
+        itemsRef.on('value', (snapshot) => {
+            let data = snapshot.val();
+            let items = Object.values(data);
+            this.setState({items});
+         });
+    }
 
     static navigationOptions = {
         header: null,
