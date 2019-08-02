@@ -19,7 +19,7 @@ const TabHeader = () => (
 class Enter extends Component {
 
     state = {
-        glucoseLevel: '112',
+        glucoseLevel: '',
         food: '',
         comments: '',
     }

@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, 
          Text, 
          ActivityIndicator, 
          StyleSheet 
     } from 'react-native';
+import * as firebase from 'firebase';
 
-export default class Loading extends React.Component {
+export default class Loading extends Component {
 
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
@@ -13,14 +14,14 @@ export default class Loading extends React.Component {
         })
     }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Loading</Text>
-        <ActivityIndicator size="large" />
-      </View>
-    )
-  }
+    render() {
+        return (
+        <View style={styles.container}>
+            <Text>Loading</Text>
+            <ActivityIndicator size="large" />
+        </View>
+        )
+    }
 }
 const styles = StyleSheet.create({
   container: {

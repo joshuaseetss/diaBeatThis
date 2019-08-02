@@ -15,12 +15,6 @@ import {
 } from 'react-navigation';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
-
-
-
-
-
-
 import LogInScreen from './screens/LogInScreen';
 import LoadingScreen from './screens/Loading';
 import Home from './screens/Home';
@@ -36,10 +30,10 @@ import Enter from './screens/Enter';
 const AppStackNavigator = createStackNavigator({
 
   Login: { screen: LogInScreen },
+  Loading: { screen: LoadingScreen },
   Inside: {
     screen: createMaterialBottomTabNavigator(
       {
-        Loading: { screen: LoadingScreen },
         Home: {
           screen: Home,
           navigationOptions: {
@@ -95,7 +89,7 @@ const AppStackNavigator = createStackNavigator({
       },
 
       {
-        initialRouteName: "Loading",
+        initialRouteName: "Home",
         activeColor: '#f0edf6',
         inactiveColor: '#226557',
         barStyle: { backgroundColor: '#3BAD87' },

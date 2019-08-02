@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import * as firebase from 'firebase';
 
-
 class LogInScreen extends Component {
 
     componentWillMount() {
@@ -73,6 +72,7 @@ class LogInScreen extends Component {
                 });
         } catch (error) {
             console.log(error.toString(error));
+            alert("Error creating user: The email is already taken or it is an invalid email");
         }
     };
 
@@ -84,6 +84,7 @@ class LogInScreen extends Component {
                 .then(res => {
                     console.log(res.user.email);
                 });
+            this.props.navigation.navigate('Loading');
         } catch (error) {
             console.log(error.toString(error));
         }
@@ -146,6 +147,8 @@ class LogInScreen extends Component {
                 >
                     <Text> Sign Up </Text>
                 </TouchableOpacity>
+
+        
 
 
             </View>

@@ -8,6 +8,8 @@ import {
     Dimensions,
     TouchableOpacity
 } from 'react-native';
+import * as firebase from 'firebase';
+
 
 
 const TabHeader = () => (
@@ -16,13 +18,35 @@ const TabHeader = () => (
     </View>
 )
 
+addPost = (glucoseLevel, food, comments) => {
+    firebase.database().ref('users/joshua').set(
+        {
+            glucoseLevel: this.props.glucoseLevel,
+            food: this.props.food,
+            comments: this.props.comments
+        }
+
+    ).then(() => {
+        console.log('Posted!')
+    }).catch((error) => {
+        console.log(error);
+    });
+} 
+
 class ManualEntry extends Component {
 
-    state = {
-        glucoseLevel: '',
-        food: '',
-        comments: '',
+    constructor(props) {
+        super(props);
+        this.state = {
+            glucoseLevel: '',
+            food: '',
+            comments: '',
+        }
+        this.handleGlucose = this.handleGlucose.bind(this);
+        this.handleFood = this.handleFood.bind(this);
+        this.handleComments = this.handleComments.bind(this);
     }
+
 
     handleGlucose = (text) => {
         this.setState({ glucoseLevel: text })
@@ -35,7 +59,7 @@ class ManualEntry extends Component {
     handleComments = (text) => {
         this.setState({ comments: text })
     }
-
+ 
 
     render() {
         return (
@@ -64,16 +88,15 @@ class ManualEntry extends Component {
 
                 <TouchableOpacity
                     style={styles.submitButton}
-                    onPress={
-                        () => this.login(this.state.email, this.state.password)
-                    }>
+                    onPress={() => this.addPost(this.state.glucoseLevel, this.state.food, this.state.comments)}
+                >
                     <Text style={styles.submitButtonText}> Post </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     style={styles.submitButton}
                     onPress={() => this.props.navigation.navigate('EnterData')}
-                    >
+                >
                     <Text style={styles.submitButtonText}> Back </Text>
                 </TouchableOpacity>
             </View>
@@ -126,17 +149,17 @@ const styles = StyleSheet.create({
         height: 40,
         borderColor: '#7a42f4',
         borderWidth: 1
-     },
+    },
 
     submitButton: {
         backgroundColor: '#7a42f4',
         padding: 10,
         margin: 15,
         height: 40,
-     },
-     submitButtonText:{
+    },
+    submitButtonText: {
         color: 'white'
-     }
+    }
 
 
 })
