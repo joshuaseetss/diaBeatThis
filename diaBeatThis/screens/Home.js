@@ -10,9 +10,7 @@ import {
     ScrollView
 } from 'react-native';
   
-import { db } from '../services/db'
-//attaining data from database 
-let itemsRef = db.ref('/items');
+
 
 const TabHeader = () => (
     <View style={styles.tabheader}>
@@ -26,13 +24,7 @@ class Home extends Component {
         items: []
     }
 
-    componentDidMount() {
-        itemsRef.on('value', (snapshot) => {
-            let data = snapshot.val();
-            let items = Object.values(data);
-            this.setState({items});
-         });
-    }
+    
 
     static navigationOptions = {
         header: null,
@@ -43,9 +35,6 @@ class Home extends Component {
             <ScrollView style={styles.container}>
                 <TabHeader/> 
 
-            {/* <Text style={styles.title}> 
-                News Feed
-            </Text> */}
                 <TouchableOpacity style={styles.card}> 
                     <Image style={styles.cardImage} 
                    source={require('../assets/pictures/MBS.jpg')}

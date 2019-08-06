@@ -8,6 +8,7 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Firebase } from './database/Firebase';
 
 import {
   createStackNavigator,
@@ -24,78 +25,86 @@ import ProfileScreen from './screens/ProfileScreen';
 import CameraScreen from './screens/CameraScreen';
 import ManualEntry from './screens/ManualEntry';
 import Enter from './screens/Enter';
+import EnterName from './screens/EnterName';
+import Email from './screens/Email';
+import Password from './screens/Password';
+
+const bottomNavigator = createMaterialBottomTabNavigator(
+  {
+    Home: {
+      screen: Home,
+      navigationOptions: {
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ tintColor }) => (
+          <View>
+            <Icon style={[{ color: tintColor }]} size={25} name={'ios-home'} />
+          </View>),
+      }
+    },
+    EnterData: {
+      screen: EnterData,
+      navigationOptions: {
+        tabBarLabel: 'Enter Data',
+        tabBarIcon: ({ tintColor }) => (
+          <View>
+            <Icon style={[{ color: tintColor }]} size={25} name={'ios-add'} />
+          </View>),
+        activeColor: '#f60c0d',
+        inactiveColor: '#f65a22',
+        barStyle: { backgroundColor: '#f69b31' },
+      }
+    },
+    Notifications: {
+      screen: NotificationScreen,
+      navigationOptions: {
+        tabBarLabel: 'Notifications',
+        tabBarIcon: ({ tintColor }) => (
+          <View>
+            <Icon style={[{ color: tintColor }]} size={25} name={'ios-heart'} />
+          </View>),
+        activeColor: '#615af6',
+        inactiveColor: '#46f6d7',
+        barStyle: { backgroundColor: '#67baf6' },
+      }
+    },
+    Profile: {
+      screen: ProfileScreen,
+      navigationOptions: {
+        tabBarLabel: 'Profile',
+        tabBarIcon: ({ tintColor }) => (
+          <View>
+            <Icon style={[{ color: tintColor }]} size={25} name={'ios-person'} />
+          </View>),
+        activeColor: '#f0edf6',
+        inactiveColor: '#133130',
+        barStyle: { backgroundColor: '#255E5E' }
+
+      }
+    },
 
 
+  },
 
+  {
+    initialRouteName: "Home",
+    activeColor: '#f0edf6',
+    inactiveColor: '#226557',
+    barStyle: { backgroundColor: '#3BAD87' },
+  },
+)
+
+const register = createStackNavigator({
+  EnterName: { screen: EnterName },
+  Email: { screen: Email },
+  Password: { screen: Password },
+
+})
 const AppStackNavigator = createStackNavigator({
 
   Login: { screen: LogInScreen },
+  Register: {screen: register},
   Loading: { screen: LoadingScreen },
-  Inside: {
-    screen: createMaterialBottomTabNavigator(
-      {
-        Home: {
-          screen: Home,
-          navigationOptions: {
-            tabBarLabel: 'Home',
-            tabBarIcon: ({ tintColor }) => (
-              <View>
-                <Icon style={[{ color: tintColor }]} size={25} name={'ios-home'} />
-              </View>),
-          }
-        },
-        EnterData: {
-          screen: EnterData,
-          navigationOptions: {
-            tabBarLabel: 'Enter Data',
-            tabBarIcon: ({ tintColor }) => (
-              <View>
-                <Icon style={[{ color: tintColor }]} size={25} name={'ios-add'} />
-              </View>),
-            activeColor: '#f60c0d',
-            inactiveColor: '#f65a22',
-            barStyle: { backgroundColor: '#f69b31' },
-          }
-        },
-        Notifications: {
-          screen: NotificationScreen,
-          navigationOptions: {
-            tabBarLabel: 'Notifications',
-            tabBarIcon: ({ tintColor }) => (
-              <View>
-                <Icon style={[{ color: tintColor }]} size={25} name={'ios-heart'} />
-              </View>),
-            activeColor: '#615af6',
-            inactiveColor: '#46f6d7',
-            barStyle: { backgroundColor: '#67baf6' },
-          }
-        },
-        Profile: {
-          screen: ProfileScreen,
-          navigationOptions: {
-            tabBarLabel: 'Profile',
-            tabBarIcon: ({ tintColor }) => (
-              <View>
-                <Icon style={[{ color: tintColor }]} size={25} name={'ios-person'} />
-              </View>),
-            activeColor: '#f0edf6',
-            inactiveColor: '#133130',
-            barStyle: { backgroundColor: '#255E5E' }
-
-          }
-        },
-
-
-      },
-
-      {
-        initialRouteName: "Home",
-        activeColor: '#f0edf6',
-        inactiveColor: '#226557',
-        barStyle: { backgroundColor: '#3BAD87' },
-      },
-    ),
-  },
+  Inside: { screen: bottomNavigator },
   Camera: { screen: CameraScreen },
   ManualEntry: { screen: ManualEntry },
   Enter: { screen: Enter }
@@ -108,9 +117,26 @@ const AppStackNavigator = createStackNavigator({
   }
 
 );
-const App = createAppContainer(AppStackNavigator);
+
+const AppContainer = createAppContainer(AppStackNavigator);
 
 
 
-export default App;
+export default class App extends Component {
+
+  componentWillMount() {
+    Firebase.init();
+  }
+
+  render() {
+
+    return (
+
+      <AppContainer /> 
+    );
+    
+  }
+
+
+}
 

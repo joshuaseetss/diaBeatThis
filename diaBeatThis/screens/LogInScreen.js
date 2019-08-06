@@ -9,24 +9,9 @@ import {
     TextInput
 } from 'react-native';
 import * as firebase from 'firebase';
-import { db } from '../services/db';
 
 class LogInScreen extends Component {
 
-    componentWillMount() {
-        // const firebaseConfig = {
-        //     apiKey: "AIzaSyA0Du6Emw6ZuN9RTJkhk2Mvc1-6f0Dh-zg",
-        //     authDomain: "diabeatthis-ead81.firebaseapp.com",
-        //     databaseURL: "https://diabeatthis-ead81.firebaseio.com",
-        //     projectId: "diabeatthis-ead81",
-        //     storageBucket: "diabeatthis-ead81.appspot.com",
-        //     messagingSenderId: "122494668373",
-        //     appId: "1:122494668373:web:9ec6702aab417769"
-        // };
-        // // Initialize Firebase
-        // firebase.initializeApp(firebaseConfig);
-        <db />
-    }
 
     static navigationOptions = {
         header: null
@@ -86,7 +71,7 @@ class LogInScreen extends Component {
                 .then(res => {
                     console.log(res.user.email);
                 });
-            this.props.navigation.navigate('Loading');
+            this.props.navigation.navigate('Home');
         } catch (error) {
             console.log(error.toString(error));
         }
@@ -136,7 +121,7 @@ class LogInScreen extends Component {
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => this.Login(this.state.email, this.state.password)}
+                    onPress={() => this.props.navigation.navigate('Home')}
 
                 >
                     <Text> Sign In </Text>
@@ -144,7 +129,8 @@ class LogInScreen extends Component {
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => this.SignUp(this.state.email, this.state.password)}
+                    // onPress={() => this.SignUp(this.state.email, this.state.password)}
+                    onPress={() => this.props.navigation.navigate('EnterName')}
 
                 >
                     <Text> Sign Up </Text>
