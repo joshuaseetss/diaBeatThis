@@ -28,6 +28,7 @@ import Enter from './screens/Enter';
 import EnterName from './screens/EnterName';
 import Email from './screens/Email';
 import Password from './screens/Password';
+import SplashScreen from './screens/SplashScreen';
 
 const bottomNavigator = createMaterialBottomTabNavigator(
   {
@@ -102,7 +103,7 @@ const register = createStackNavigator({
 const AppStackNavigator = createStackNavigator({
 
   Login: { screen: LogInScreen },
-  Register: {screen: register},
+  Register: { screen: register },
   Loading: { screen: LoadingScreen },
   Inside: { screen: bottomNavigator },
   Camera: { screen: CameraScreen },
@@ -124,17 +125,37 @@ const AppContainer = createAppContainer(AppStackNavigator);
 
 export default class App extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      authStatusReported: true,
+      isUserAuthenticated: false,
+
+    }
+  }
   componentWillMount() {
     Firebase.init();
+    Firebase.auth.onAuthStateChanged(user => {
+      this.setState({
+        authStatusReported: true,
+        isUserAuthenticated: !!user,
+      })
+    });
   }
 
   render() {
 
     return (
+      // (this.authStatusReported) ?
+      //   (
+      //     this.isUserAuthenticated ? <Home /> : <AppContainer />
+      //   )
 
-      <AppContainer /> 
+      //   : <SplashScreen />
+      <AppContainer />
     );
-    
+
   }
 
 

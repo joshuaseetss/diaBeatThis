@@ -9,6 +9,7 @@ import {
     TextInput
 } from 'react-native';
 import * as firebase from 'firebase';
+import { Firebase } from '../database/Firebase';
 
 class LogInScreen extends Component {
 
@@ -49,20 +50,14 @@ class LogInScreen extends Component {
         }
     }
 
-    Login = (email, password) => {
-        try {
-            firebase
-                .auth()
-                .signInWithEmailAndPassword(email, password)
-                .then(res => {
-                    console.log(res.user.email);
-                });
+    async login() {
+        try{
+            await Firebase.auth.signInWithEmailAndPassword(this.state.email, this.state.password);
             this.props.navigation.navigate('Home');
-        } catch (error) {
-            console.log(error.toString(error));
+        } catch (e) {
+            alert (e);
         }
-    };
-
+    }
     render() {
 
         if (this.state.isLoading) {
@@ -89,6 +84,7 @@ class LogInScreen extends Component {
                     <TextInput style={styles.inputs}
                         placeholder="Email"
                         keyboardType="email-address"
+                        autoCapitalize="none"
                         underlineColorAndroid='transparent'
                         onChangeText={(email) => this.setState({ email })} />
                 </View>
@@ -98,6 +94,7 @@ class LogInScreen extends Component {
                     <TextInput style={styles.inputs}
                         placeholder="Password"
                         secureTextEntry={true}
+                        autoCapitalize="none"
                         underlineColorAndroid='transparent'
                         onChangeText={(password) => this.setState({ password })} />
                 </View>
@@ -107,7 +104,7 @@ class LogInScreen extends Component {
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => this.props.navigation.navigate('Home')}
+                    onPress={() => this.login()}
 
                 >
                     <Text> Sign In </Text>
