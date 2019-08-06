@@ -8,8 +8,8 @@ import {
     Dimensions,
     TextInput
 } from 'react-native';
-import * as firebase from 'firebase';
 import { Firebase } from '../database/Firebase';
+import SplashScreen from './SplashScreen';
 
 class LogInScreen extends Component {
 
@@ -128,30 +128,6 @@ class LogInScreen extends Component {
     }
 
 }
-class SplashScreen extends React.Component {
-
-
-    render() {
-
-        const viewStyles = [styles.splash, { backgroundColor: 'red' }];
-
-        return (
-            <View style={viewStyles}>
-                <Image
-                    style={{
-                        alignSelf: 'center',
-                        height: 150,
-                        width: 150,
-                    }}
-                    source={require('../assets/pictures/logo.jpg')}
-                />
-                <Text style={styles.textStyles}>
-                    Dia-Beat-This!
-          </Text>
-            </View>
-        );
-    }
-}
 
 
 export default LogInScreen;
@@ -164,18 +140,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#ffd700'
 
-    },
-    splash: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-
-    textStyles: {
-        color: 'white',
-        fontSize: 40,
-        fontWeight: 'bold'
     },
     position: {
         position: 'absolute',
@@ -190,7 +154,6 @@ const styles = StyleSheet.create({
         bottom: 20,
         marginTop: 120,
     },
-
     inputContainer: {
         borderBottomColor: '#F5FCFF',
         backgroundColor: '#FFFFFF',
