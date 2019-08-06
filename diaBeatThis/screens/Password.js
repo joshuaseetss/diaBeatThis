@@ -29,7 +29,8 @@ export default class Password extends Component {
 
         } catch (e) {
 
-            alert(e);
+            alert(e + "Error creating user: The email is already taken or it is an invalid email");
+            
         }
 
     }

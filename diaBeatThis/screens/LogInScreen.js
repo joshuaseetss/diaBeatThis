@@ -49,20 +49,6 @@ class LogInScreen extends Component {
         }
     }
 
-    SignUp = (email, password) => {
-        try {
-            firebase
-                .auth()
-                .createUserWithEmailAndPassword(email, password)
-                .then(user => {
-                    console.log(user);
-                });
-        } catch (error) {
-            console.log(error.toString(error));
-            alert("Error creating user: The email is already taken or it is an invalid email");
-        }
-    };
-
     Login = (email, password) => {
         try {
             firebase
@@ -129,7 +115,6 @@ class LogInScreen extends Component {
 
                 <TouchableOpacity
                     style={styles.button}
-                    // onPress={() => this.SignUp(this.state.email, this.state.password)}
                     onPress={() => this.props.navigation.navigate('EnterName')}
 
                 >
@@ -206,9 +191,7 @@ const styles = StyleSheet.create({
         fontSize: 40,
         fontWeight: '300',
         bottom: 20,
-        marginTop: 70
-
-
+        marginTop: 120,
     },
 
     inputContainer: {
@@ -237,6 +220,7 @@ const styles = StyleSheet.create({
     button: {
         alignItems: 'center',
         backgroundColor: '#ff0000',
-        padding: 10
+        padding: 10,
+        marginTop: 8
     },
 })
