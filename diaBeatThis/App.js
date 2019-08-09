@@ -129,7 +129,7 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      authStatusReported: true,
+      authStatusReported: false,
       isUserAuthenticated: false,
 
     }
@@ -137,7 +137,7 @@ export default class App extends Component {
   componentWillMount() {
     Firebase.init();
     Firebase.auth.onAuthStateChanged(user => {
-      this.setState({
+       this.setState({
         authStatusReported: true,
         isUserAuthenticated: !!user,
       })

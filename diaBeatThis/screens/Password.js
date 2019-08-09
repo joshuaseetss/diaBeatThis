@@ -23,9 +23,11 @@ export default class Password extends Component {
 
     async next() {
         const{email} = Firebase.registrationInfo;
+        const{displayName} = Firebase.registrationInfo;
         try{
             await Firebase.auth.createUserWithEmailAndPassword(email, this.state.password);
             this.props.navigation.navigate('Home');
+            Firebase.writeUserData(email, displayName);
 
         } catch (e) {
 
