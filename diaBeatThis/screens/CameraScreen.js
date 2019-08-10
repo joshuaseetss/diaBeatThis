@@ -10,6 +10,7 @@ import {
   Button
 } from 'react-native';
 import { RNCamera } from 'react-native-camera';
+import { RNTextDetector } from 'react-native-text-detector';
 
 export default class CameraScreen extends Component {
 
@@ -50,6 +51,32 @@ export default class CameraScreen extends Component {
         </View>
       );
     }
+
+    takePicture = async () => {
+      const { store } = this.props.store;
+      try {
+        store.loaderTrue();
+        console.log('try', store.loader);
+        const options = {
+          quality: 0.8,
+          base64: true,
+          skipProcessing: true,
+        };
+        const { uri } = await this.camera.takePictureAsync(options);
+        const visionResp = await RNTextDetector.detectFromUri(uri);
+        this.props.store.store.addItem(visionResp);
+        console.log('visionResp', visionResp);
+      } catch (e) {
+        console.warn(e);
+      }
+      store.loaderFalse();
+      let id = store.memoArray.length - 1;
+      store.setEditId(parseInt(id));
+      this.props.navigation.navigate('Postview', {
+        otherParam: id,
+      });
+      console.log('try outside', store.loader);
+    };
 
 
     return (

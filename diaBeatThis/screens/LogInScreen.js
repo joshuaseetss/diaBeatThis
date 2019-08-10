@@ -6,7 +6,7 @@ import {
     TouchableOpacity,
     Image,
     Dimensions,
-    TextInput
+    TextInput,
 } from 'react-native';
 import { Firebase } from '../database/Firebase';
 import SplashScreen from './SplashScreen';
