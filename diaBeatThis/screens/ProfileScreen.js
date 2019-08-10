@@ -9,12 +9,19 @@ import {
     Dimensions,
     ScrollView
 } from 'react-native';
+import { Firebase } from '../database/Firebase';
+import { StackActions, NavigationActions } from 'react-navigation';
+
 
 const TabHeader = () => (
     <View style={styles.tabheader}>
         <Text style={styles.tabtitle}> Profile </Text>
     </View>
 )
+const resetAction = StackActions.reset({
+    index: 0,
+    actions: [NavigationActions.navigate({ routeName: 'Login' })],
+  });
 
 class ProfileScreen extends Component {
 
@@ -22,57 +29,74 @@ class ProfileScreen extends Component {
         header: null
     }
 
+
+    logout() {
+        Firebase.auth.signOut();
+        alert('You have logged out');
+        this.props.navigation.dispatch(resetAction);
+    }
+
     render() {
-        return (
-            <ScrollView>
-                <TabHeader />
-                <View style={styles.header}></View>
-                <Image style={styles.avatar} source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }} />
-                <View style={styles.innercontainer}>
-                    <Text style={styles.name}>
-                        JOHN DOE
+            return (
+                <ScrollView>
+                    <TabHeader />
+                    <View style={styles.header}></View>
+                    <Image style={styles.avatar} source={{ uri: 'https://bootdey.com/img/Content/avatar/avatar6.png' }} />
+                    <View style={styles.innercontainer}>
+                        <Text style={styles.name}>
+                            JOHN DOE
                     </Text>
-                    <Text style={styles.description}>
-                        Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne a
+                        <Text style={styles.description}>
+                            Lorem ipsum dolor sit amet, saepe sapientem eu nam. Qui ne a
                     </Text>
 
-                    <View style={styles.buttonContainer}>
-                        <TouchableOpacity
-                            style={styles.button}
-                        >
-                            <Text>
-                                12 followers
+                        <View style={styles.buttonContainer}>
+                            <TouchableOpacity
+                                style={styles.button}
+                            >
+                                <Text>
+                                    12 followers
                             </Text>
-                        </TouchableOpacity>
+                            </TouchableOpacity>
 
 
-                        <TouchableOpacity
-                            style={styles.button}
-                        >
-                            <Text>
-                                1 post
+                            <TouchableOpacity
+                                style={styles.button}
+                            >
+                                <Text>
+                                    1 post
                             </Text>
-                        </TouchableOpacity>
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.signOutButton}
+                                onPress={() => this.logout()}
 
-                    </View>
+                            >
+                                <Text>
+                                    LogOut
+                            </Text>
+                            </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.card}>
+                        </View>
+
+                        <TouchableOpacity style={styles.card}>
                             <Image style={styles.cardImage}
                                 source={require('../assets/pictures/MBS.jpg')}
                             />
                             <Text style={styles.cardText}>
-                                Hello World! 
+                                Hello World!
                     </Text>
 
                         </TouchableOpacity>
 
-                </View>
+                    </View>
 
 
-            </ScrollView>
+                </ScrollView>
 
 
-        )
+            )
+
     }
 
 }
@@ -108,7 +132,9 @@ const styles = StyleSheet.create({
     tabheader: {
         paddingTop: 35,
         paddingBottom: 5,
-        backgroundColor: "#255E5E"
+        backgroundColor: "#255E5E",
+        flexDirection: 'column',
+
     },
     header: {
         backgroundColor: "#A9CFCF",
@@ -157,14 +183,14 @@ const styles = StyleSheet.create({
     },
     card: {
         backgroundColor: '#fff',
-        marginBottom:10,
-        marginLeft:'2%',
+        marginBottom: 10,
+        marginLeft: '2%',
         width: '96%',
         shadowColor: '#000',
-        shadowOpacity:0.2,
+        shadowOpacity: 0.2,
         shadowRadius: 1,
         shadowOffset: {
-            width: 3, 
+            width: 3,
             height: 3,
         }
     },
@@ -176,6 +202,12 @@ const styles = StyleSheet.create({
     cardText: {
         padding: 10,
         fontSize: 16
+    },
+    signOutButton: {
+        alignItems: 'center',
+        backgroundColor: '#ff0000',
+        padding: 10,
+        marginTop: 8
     },
 
 

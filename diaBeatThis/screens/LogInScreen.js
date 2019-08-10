@@ -23,8 +23,8 @@ class LogInScreen extends Component {
 
         this.state = {
             isLoading: true,
-            email: '',
-            password: '',
+            email: 'joshu5797@gmail.com',
+            password: 'joshua5797',
         }
     }
 

@@ -44,7 +44,8 @@ export class Firebase extends Component {
     }
 
     static readUserData() {
-        firebase.database().ref('Users/').once('value', function (snapshot) {
+        var user = firebase.auth().currentUser
+        firebase.database().ref('Users/' + user.uid).once('value', function (snapshot) {
             console.log(snapshot.val())
         });
     }
