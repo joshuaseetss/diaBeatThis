@@ -28,10 +28,11 @@ export default class Password extends Component {
             await Firebase.auth.createUserWithEmailAndPassword(email, this.state.password);
             this.props.navigation.navigate('Home');
             Firebase.writeUserData(email, displayName);
+   
 
         } catch (e) {
 
-            alert(e + "Error creating user: The email is already taken or it is an invalid email");
+            alert(e + " Error creating user: The email is already taken or it is an invalid email");
             
         }
 
