@@ -8,7 +8,7 @@ import {
     Dimensions,
     TouchableOpacity
 } from 'react-native';
-import { Firebase } from '../database/Firebase';
+import * as firebase from 'firebase';
 
 
 
@@ -18,9 +18,22 @@ const TabHeader = () => (
     </View>
 )
 
+addPost = (glucoseLevel, food, comments) => {
+    firebase.database().ref('users/joshua').set(
+        {
+            glucoseLevel: this.props.glucoseLevel,
+            food: this.props.food,
+            comments: this.props.comments
+        }
 
+    ).then(() => {
+        console.log('Posted!')
+    }).catch((error) => {
+        console.log(error);
+    });
+} 
 
-class ManualEntry extends Component {
+class AutoEntry extends Component {
 
     constructor(props) {
         super(props);
@@ -75,7 +88,7 @@ class ManualEntry extends Component {
 
                 <TouchableOpacity
                     style={styles.submitButton}
-                    onPress={() => Firebase.addPost(this.state.glucoseLevel, this.state.food, this.state.comments)}
+                    onPress={() => this.addPost(this.state.glucoseLevel, this.state.food, this.state.comments)}
                 >
                     <Text style={styles.submitButtonText}> Post </Text>
                 </TouchableOpacity>
@@ -152,4 +165,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default ManualEntry;
+export default AutoEntry;
